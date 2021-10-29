@@ -17,7 +17,7 @@ Table `authors`
     name          nvarchar(255)     NOT NULL
     url           varchar(255)  -- external personal page
     profile_image varchar(255)
-    blocked       bit
+    blocked       bit           -- posts published by the author will be blocked
 ```
 
 Table `posts`
@@ -55,7 +55,7 @@ Table `tags`
     id            bigint            PRIMARY KEY
     name          nvarchar(64)      NOT NULL UNIQUE
     type_id       bigint
-    blocked       bit
+    blocked       bit           -- posts with this tag will be blocked
     description   nvarchar(1000)
 /* constraints */
     FOREIGN KEY (type_id) REFERENCES tag_types(id)
@@ -67,7 +67,6 @@ Table `tag_types`
 /*  name          datatype          constraints */
     id            bigint            PRIMARY KEY
     name          nvarchar(64)      NOT NULL UNIQUE
-    description   nvarchar(1000)
 ```
 
 ### Intermediary Tables
