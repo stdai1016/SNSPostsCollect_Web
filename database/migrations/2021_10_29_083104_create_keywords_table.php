@@ -15,8 +15,10 @@ class CreateKeywordsTable extends Migration
     {
         Schema::create('keywords', function (Blueprint $table) {
             $table->id();
-            $table->addColumn('nvarchar', 'word', ['length'=>64])->unique();
-            $table->addColumn('nvarchar', 'description', ['length'=>500])
+            // $table->addColumn('nvarchar', 'word', ['length'=>64])->unique();
+            $table->string('word', 128)->unique();
+            // $table->addColumn('nvarchar', 'description', ['length'=>500])
+            $table->string('description', 1000)->unique()
                   ->nullable();
         });
     }

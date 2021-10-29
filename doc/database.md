@@ -14,7 +14,7 @@ Table `authors`
 /*  name          datatype          constraints */
     id            bigint            PRIMARY KEY
     userid        varchar(32)       NOT NULL UNIQUE -- alias of user
-    name          nvarchar(64)      NOT NULL
+    name          varchar(128)      NOT NULL
     url           varchar(255)  -- external personal page
     profile_image varchar(255)
     blocked       bit           -- posts published by the author will be blocked
@@ -27,7 +27,7 @@ Table `posts`
     id            bigint            PRIMARY KEY
     author_id     bigint            NOT NULL
     replied_to    bigint        -- which post is replied to
-    text          nvarchar(500)
+    text          varchar(1000)
     referred_to   varchar(255)  -- external page that the post refer to
     created_at    datetime      -- time of the post was published
     updated_at    datetime      -- time of the post was edited by author
@@ -44,8 +44,8 @@ Table `keywords`
 ```SQL
 /*  name          datatype          constraints */
     id            bigint            PRIMARY KEY
-    word          nvarchar(64)      NOT NULL UNIQUE
-    description   nvarchar(500)
+    word          varchar(128)      NOT NULL UNIQUE
+    description   varchar(1000)
 ```
 
 Table `tags`
@@ -53,10 +53,10 @@ Table `tags`
 ```SQL
 /*  name          datatype          constraints */
     id            bigint            PRIMARY KEY
-    name          nvarchar(64)      NOT NULL UNIQUE
+    name          varchar(128)      NOT NULL UNIQUE
     type_id       bigint
     blocked       bit           -- posts with this tag will be blocked
-    description   nvarchar(500)
+    description   varchar(1000)
 /* constraints */
     FOREIGN KEY (type_id) REFERENCES tag_types(id)
 ```
@@ -66,7 +66,7 @@ Table `tag_types`
 ```SQL
 /*  name          datatype          constraints */
     id            bigint            PRIMARY KEY
-    name          nvarchar(64)      NOT NULL UNIQUE
+    name          varchar(128)      NOT NULL UNIQUE
 ```
 
 ### Intermediary Tables

@@ -19,7 +19,8 @@ class CreatePostsTable extends Migration
                   ->constrained()->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('replied_to')->nullable()
                   ->constrained('posts')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->addColumn('nvarchar', 'text', ['length'=>500])->nullable();
+            // $table->addColumn('nvarchar', 'text', ['length'=>500])->nullable();
+            $table->string('text', 1000)->nullable();
             $table->string('referred_to', 255)->nullable();
             $table->dateTime('created_at')->nullable();
             $table->dateTime('updated_at')->nullable();

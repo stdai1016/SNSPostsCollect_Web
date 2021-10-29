@@ -15,11 +15,13 @@ class CreateTagsTable extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->addColumn('nvarchar', 'name', ['length'=>64])->unique();
+            // $table->addColumn('nvarchar', 'name', ['length'=>64])->unique();
+            $table->string('name', 128)->unique();
             $table->foreignId('type_id')->nullable()
                   ->constrained('tag_types')->cascadeOnUpdate()->nullOnDelete();
             $table->boolean('blocked')->nullable();
-            $table->addColumn('nvarchar', 'description', ['length' => 500])
+            // $table->addColumn('nvarchar', 'description', ['length' => 500])
+            $table->string('description', 1000)->unique()
                   ->nullable();
         });
     }
