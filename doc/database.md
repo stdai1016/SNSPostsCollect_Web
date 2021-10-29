@@ -28,7 +28,7 @@ Table `posts`
     author_id     bigint            NOT NULL
     replied_to    bigint        -- which post is replied to
     text          nvarchar(1000)
-    referred_to   varchar(200)  -- link of the response
+    referred_to   varchar(200)  -- external page that the post refer to
     created_at    datetime      -- time of the post was published
     updated_at    datetime      -- time of the post was edited by author
     deleted_at    datetime      -- time of the post was removed from db
