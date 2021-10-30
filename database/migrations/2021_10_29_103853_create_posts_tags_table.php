@@ -13,14 +13,17 @@ class CreatePostsTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts_tags', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('post_id')
-                  ->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('tag_id')
-                  ->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->unique(['post_id', 'tag_id']);
-        });
+        if (!Schema::hasTable('posts_tags'))
+        {
+            Schema::create('posts_tags', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('post_id')
+                    ->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+                $table->foreignId('tag_id')
+                    ->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+                $table->unique(['post_id', 'tag_id']);
+            });
+        }
     }
 
     /**

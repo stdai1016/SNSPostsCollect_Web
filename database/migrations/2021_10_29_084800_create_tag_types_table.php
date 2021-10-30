@@ -13,11 +13,14 @@ class CreateTagTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('tag_types', function (Blueprint $table) {
-            $table->id();
-            // $table->addColumn('nvarchar', 'name', ['length'=>64])->unique();
-            $table->string('name', 128)->unique();
-        });
+        if (!Schema::hasTable('tag_types'))
+        {
+            Schema::create('tag_types', function (Blueprint $table) {
+                $table->id();
+                // $table->addColumn('nvarchar', 'name', ['length'=>64])->unique();
+                $table->string('name', 128)->unique();
+            });
+        }
     }
 
     /**

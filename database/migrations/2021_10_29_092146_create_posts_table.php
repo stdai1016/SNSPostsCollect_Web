@@ -13,19 +13,23 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('author_id')
-                  ->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('replied_to')->nullable()
-                  ->constrained('posts')->cascadeOnUpdate()->cascadeOnDelete();
-            // $table->addColumn('nvarchar', 'text', ['length'=>500])->nullable();
-            $table->string('text', 1000)->nullable();
-            $table->string('referred_to', 255)->nullable();
-            $table->dateTime('created_at')->nullable();
-            $table->dateTime('updated_at')->nullable();
-            $table->dateTime('deleted_at')->nullable();
-        });
+        
+        if (!Schema::hasTable('posts'))
+        {
+            Schema::create('posts', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('author_id')
+                    ->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+                $table->foreignId('replied_to')->nullable()
+                    ->constrained('posts')->cascadeOnUpdate()->cascadeOnDelete();
+                // $table->addColumn('nvarchar', 'text', ['length'=>500])->nullable();
+                $table->string('text', 1000)->nullable();
+                $table->string('referred_to', 255)->nullable();
+                $table->dateTime('created_at')->nullable();
+                $table->dateTime('updated_at')->nullable();
+                $table->dateTime('deleted_at')->nullable();
+            });
+        }
     }
 
     /**

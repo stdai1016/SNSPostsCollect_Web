@@ -13,14 +13,17 @@ class CreateKeywordsTable extends Migration
      */
     public function up()
     {
-        Schema::create('keywords', function (Blueprint $table) {
-            $table->id();
-            // $table->addColumn('nvarchar', 'word', ['length'=>64])->unique();
-            $table->string('word', 128)->unique();
-            // $table->addColumn('nvarchar', 'description', ['length'=>500])
-            $table->string('description', 1000)->unique()
-                  ->nullable();
-        });
+        if (!Schema::hasTable('keywords'))
+        {
+            Schema::create('keywords', function (Blueprint $table) {
+                $table->id();
+                // $table->addColumn('nvarchar', 'word', ['length'=>64])->unique();
+                $table->string('word', 128)->unique();
+                // $table->addColumn('nvarchar', 'description', ['length'=>500])
+                $table->string('description', 1000)
+                    ->nullable();
+            });
+        }
     }
 
     /**

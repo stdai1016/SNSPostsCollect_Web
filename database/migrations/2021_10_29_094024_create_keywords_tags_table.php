@@ -13,14 +13,17 @@ class CreateKeywordsTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('keywords_tags', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('keyword_id')
-                  ->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('tag_id')
-                  ->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->unique(['keyword_id', 'tag_id']);
-        });
+        if (!Schema::hasTable('keywords_tags'))
+        {
+            Schema::create('keywords_tags', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('keyword_id')
+                    ->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+                $table->foreignId('tag_id')
+                    ->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+                $table->unique(['keyword_id', 'tag_id']);
+            });
+        }
     }
 
     /**
