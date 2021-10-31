@@ -7,23 +7,39 @@ use \Illuminate\Database\Eloquent\Builder;
 trait QuerySelect
 {
     /** Get the names of the columns for exact match.
-     *  Set `EXACT_MATCH_COLUMNS` to enable search
+     *  Define class constant `EXACT_MATCH_COLUMNS` to enable exact match.
      *  @return string[]
      */
-    public function getExactMatchColumns()
+    public static function getExactMatchColumns()
     {
-        return defined('static::EXACT_MATCH_COLUMNS')
-            ? static::EXACT_MATCH_COLUMNS : [];
+        $c = get_called_class();
+        $cols =
+            defined("$c::EXACT_MATCH_COLUMNS") ? $c::EXACT_MATCH_COLUMNS : [];
+        return is_array($cols) ? $cols : explode(',', $cols);
     }
 
     /** Get the name of the column for searching.
-     *  Set `PATTERN_MATCH_COLUMN` to enable search
+     *  Define class constant `PATTERN_MATCH_COLUMN` to enable pattern match
      *  @return string|null
      */
-    public function getPatternMatchColumn()
+    public static function getPatternMatchColumn()
     {
-        return defined('static::PATTERN_MATCH_COLUMN')
-            ? static::PATTERN_MATCH_COLUMN : null;
+        $c = get_called_class();
+        return defined("$c::PATTERN_MATCH_COLUMN")
+            ? $c::PATTERN_MATCH_COLUMN : null;
+    }
+
+    /** Get reserved keys on URL query.
+     *  Define class constant `ADDITIONAL_RESERVED_KEYS` to expand keys
+     *  @return string[]
+     */
+    public static function getReservedKeys() {
+        $keys = ['q', 'max_id', 'limit', 'fields', 'expansions'];
+        $c = get_called_class();
+        $ex = defined("$c::ADDITIONAL_RESERVED_KEYS")
+            ? $c::ADDITIONAL_RESERVED_KEYS : [];
+        $keys = array_merge($keys, is_array($ex) ? $ex : explode(',' ,$ex));
+        return array_unique($keys);
     }
 
     /** Get a new query builder for the model's table.
@@ -34,20 +50,20 @@ trait QuerySelect
     /** Parse request queries
      *  @return array
      */
-    public function parseRequestQuery()
+    public static function parseRequestQuery()
     {
+        $req = request();
         $query = [];
-        foreach($this->getExactMatchColumns() as $col) {
-            $v = request()->query($col);
+        foreach(static::getExactMatchColumns() as $col) {
+            $v = $req->query($col);
             if (!$v) $query[$col] = null;
             else if (is_array($v)) $query[$col] = $v;
             else $query[$col] = explode(',', $v);
         }
-        $query['q'] = request()->query('q');
-        $query['max_id'] = request()->query('max_id');
-        $query['limit'] = request()->query('limit');
-        $query['fields'] = request()->query('fields');
+        foreach (static::getReservedKeys() as $k) $query[$k] = $req->query($k);
         if ($query['fields']) $query['fields'] = explode(',', $query['fields']);
+        $expansions = $query['expansions'];
+        if ($expansions) $query['expansions'] = explode(',', $expansions);
 
         return $query;
     }
