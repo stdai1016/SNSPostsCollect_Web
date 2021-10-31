@@ -18,7 +18,8 @@ class Post extends Model
     ];
 
     // hidden attributes
-    protected $hidden = [
-        Post::DELETED_AT
-    ];
+    protected $hidden = [Post::DELETED_AT];
+
+    // mass assignment
+    protected $guarded = ['id'];
 }

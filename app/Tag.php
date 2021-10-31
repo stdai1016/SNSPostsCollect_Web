@@ -13,4 +13,7 @@ class Tag extends Model
     protected $casts = [
         'blocked' => 'boolean',
     ];
+
+    // mass assignment
+    protected $guarded = ['id'];
 }
