@@ -27,11 +27,12 @@ Table `posts`
     id            bigint            PRIMARY KEY
     author_id     bigint            NOT NULL
     replied_to    bigint        -- which post is replied to
-    text          varchar(1000)
+    text          varchar(2000)
     referred_to   varchar(255)  -- external page that the post refer to
     created_at    datetime      -- time of the post was published
     updated_at    datetime      -- time of the post was edited by author
     deleted_at    datetime      -- time of the post was removed from db
+    blocked       bit           -- posts is blocked
 /* constraints */
     FOREIGN KEY (author_id)  REFERENCES authors(id)
     FOREIGN KEY (replied_to) REFERENCES posts(id)
@@ -55,7 +56,6 @@ Table `tags`
     id            bigint            PRIMARY KEY
     name          varchar(128)      NOT NULL UNIQUE
     type_id       bigint
-    blocked       bit           -- posts with this tag will be blocked
     description   varchar(1000)
 /* constraints */
     FOREIGN KEY (type_id) REFERENCES tag_types(id)

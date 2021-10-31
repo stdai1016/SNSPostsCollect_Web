@@ -17,7 +17,6 @@ class CreateTagTypesTable extends Migration
         {
             Schema::create('tag_types', function (Blueprint $table) {
                 $table->id();
-                // $table->addColumn('nvarchar', 'name', ['length'=>64])->unique();
                 $table->string('name', 128)->unique();
             });
         }

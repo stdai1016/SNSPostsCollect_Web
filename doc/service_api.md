@@ -69,7 +69,7 @@ Attributes:
 
 * __id__: The unique keyword ID.
 * __word__: The unique word of the keyword. Max length is 32 characters.
-* __description__: Description of the keyword. Max length is 255 characters.
+* __description__: Description of the keyword. Max length is 250 characters.
 * __tags__: List of IDs of associated tags.
 
 ### Tag
@@ -87,7 +87,7 @@ Attributes:
 
 * __id__: The unique tag ID.
 * __name__: The unique name of the tag. Max length is 32 characters.
-* __description__: Description of the tag. Max length is 255 characters.
+* __description__: Description of the tag. Max length is 250 characters.
 * __type__: The tag's type number.
 
 ### TagType
