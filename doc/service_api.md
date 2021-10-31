@@ -66,105 +66,113 @@
   </tr>
   <tr>
     <td rowspan="5">Posts</td>
-    <td><code>GET /posts</code></td>
+    <td><a href="#get-apiposts"><code>GET /api/posts</code></a></td>
     <td>Retrieve posts</td>
     <td></td>
   </tr>
   <tr>
-    <td><code>GET /posts/:id</code></td>
+    <td><a href="#get-apipostsid"><code>GET /api/posts/:id</code></a></td>
     <td>Retrieve a post with an ID</td>
     <td></td>
   </tr>
   <tr>
-    <td><code>DELETE /posts/:id</code></td>
+    <td><a href="#delete-apipostsid"><code>DELETE /api/posts/:id</code></a></td>
     <td>Delete a specific post by an ID</td>
     <td>Required</td>
   </tr>
   <tr>
-    <td><code>PUT /posts/:post_id/tags/:tag_id</code></td>
+    <td>
+      <a href="#put-apipostspost_idtagstag_id">
+        <code>PUT /api/posts/:post_id/tags/:tag_id</code>
+      </a>
+    </td>
     <td>Tag the post</td>
     <td>Required</td>
   </tr>
   <tr>
-    <td><code>DELETE /posts/:post_id/tags/:tag_id</code></td>
+    <td>
+      <a href="#delete-apipostspost_idtagstag_id">
+        <code>DELETE /api/posts/:post_id/tags/:tag_id</code>
+      </a>
+    </td>
     <td>Untag the post</td>
     <td>Required</td>
   </tr>
   <tr>
     <td rowspan="3">Authors</td>
-    <td><code>GET /authors</code></td>
+    <td><a href="#get-apiauthors"><code>GET /api/authors</code></a></td>
     <td>Retrieve authors</td>
     <td></td>
   </tr>
   <tr>
-    <td><code>GET /authors/:id</code></td>
+    <td><a href="#get-apiauthorsid"><code>GET /api/authors/:id</code></a></td>
     <td>Retrieve an author with an ID</td>
     <td></td>
   </tr>
   <tr>
-    <td><code>PATCH /authors/:id</code></td>
+    <td><a href="#patch-apiauthorsid"><code>PATCH /api/authors/:id</code></a></td>
     <td>Modify attributes of specific author</td>
     <td>Required</td>
   </tr>
   <tr>
     <td rowspan="6">Keywords</td>
-    <td><code>GET /keywords</code></td>
+    <td><a href="#get-apikeywords"><code>GET /api/keywords</code></a></td>
     <td>Retrieve keywords</td>
     <td></td>
   </tr>
   <tr>
-    <td><code>GET /keywords/:id</code></td>
+    <td><a href="#get-apikeywordsid"><code>GET /api/keywords/:id</code></a></td>
     <td>Retrieve a keyword with an ID</td>
     <td></td>
   </tr>
   <tr>
-    <td><code>POST /keywords</code></td>
+    <td><a href="#post-apikeywords"><code>POST /api/keywords</code></a></td>
     <td>Create a new keyword</td>
     <td>Required</td>
   </tr>
   <tr>
-    <td><code>PUT /keywords/:id</code></td>
+    <td><a href="#put-apikeywordsid"><code>PUT /api/keywords/:id</code></a></td>
     <td>Replace the keyword specified by ID with another keyword</td>
     <td>Required</td>
   </tr>
   <tr>
-    <td><code>PATCH /keywords/:id</code></td>
+    <td><a href="#patch-apikeywordsid"><code>PATCH /api/keywords/:id</code></a></td>
     <td>Modify attributes of specific keyword</td>
     <td>Required</td>
   </tr>
   <tr>
-    <td><code>DELETE /keywords/:id</code></td>
+    <td><a href="#delete-apikeywordsid"><code>DELETE /api/keywords/:id</code></a></td>
     <td>Delete a specific keyword by an ID</td>
     <td>Required</td>
   </tr>
   <tr>
     <td rowspan="7">Tags</td>
-    <td><code>GET /tags</code></td>
+    <td><a href="#get-apitags"><code>GET /api/tags</code></a></td>
     <td>Retrieve tags</td>
     <td></td>
   </tr>
   <tr>
-    <td><code>GET /tags/:id</code></td>
+    <td><a href="#get-apitagsid"><code>GET /api/tags/:id</code></a></td>
     <td>Retrieve a tag with an ID</td>
     <td></td>
   </tr>
   <tr>
-    <td><code>POST /tags</code></td>
+    <td><a href="#post-apitags"><code>POST /api/tags</code></a></td>
     <td>Create a new tag</td>
     <td>Required</td>
   </tr>
   <tr>
-    <td><code>PUT /tags/:id</code></td>
+    <td><a href="#put-apitagsid"><code>PUT /api/tags/:id</code></a></td>
     <td>Replace the tag specified by ID with another tag</td>
     <td>Required</td>
   </tr>
   <tr>
-    <td><code>PATCH /tags/:id</code></td>
+    <td><a href="#patch-apitagsid"><code>PATCH /api/tags/:id</code></a></td>
     <td>Modify attributes of specific tag</td>
     <td>Required</td>
   </tr>
   <tr>
-    <td><code>DELETE /tags/:id</code></td>
+    <td><a href="#delete-apitagsid"><code>DELETE /api/tags/:id</code></a></td>
     <td>Delete a specific tag by an ID</td>
     <td>Required</td>
   </tr>
@@ -172,40 +180,40 @@
 
 ## API reference
 
-### `GET /posts`
+### `GET /api/posts`
 
-### `GET /posts/:id`
+### `GET /api/posts/:id`
 
-### `DELETE /posts/:id`
+### `DELETE /api/posts/:id`
 
-### `GET /authors`
+### `GET /api/authors`
 
-### `GET /authors/:id`
+### `GET /api/authors/:id`
 
-### `PATCH /authors/:id`
+### `PATCH /api/authors/:id`
 
-### `GET /tags`
+### `GET /api/tags`
 
-### `GET /tags/:id`
+### `GET /api/tags/:id`
 
-### `GET /tags/name/:name`
+### `GET /api/tags/name/:name`
 
-### `POST /tags`
+### `POST /api/tags`
 
-### `PUT /tags/:id`
+### `PUT /api/tags/:id`
 
-### `PATCH /tags/:id`
+### `PATCH /api/tags/:id`
 
-### `DELETE /tags/:id`
+### `DELETE /api/tags/:id`
 
-### `GET /keywords`
+### `GET /api/keywords`
 
-### `GET /keywords/:id`
+### `GET /api/keywords/:id`
 
-### `POST /keywords`
+### `POST /api/keywords`
 
-### `PUT /keywords/:id`
+### `PUT /api/keywords/:id`
 
-### `PATCH /keywords/:id`
+### `PATCH /api/keywords/:id`
 
-### `DELETE /keywords/:id`
+### `DELETE /api/keywords/:id`
