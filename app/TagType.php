@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TagTypes extends Model
+class TagType extends Model
 {
     // no timestamps
     public $timestamps = false;
