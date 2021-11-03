@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AuthorRequest;
 use App\Author;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthorController extends Controller
 {
-    use QuerySelect, JsonResponse;
+    use QuerySelect, ResponseHelper;
 
     const EXACT_MATCH_COLUMNS = ['id', 'userid', 'name'];
     const PATTERN_MATCH_COLUMN = 'name';
@@ -45,22 +45,14 @@ class AuthorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\AuthorRequest $request
      * @param  \App\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Author $author)
+    public function update(AuthorRequest $request, Author $author)
     {
-        if (strcmp($request->method(), 'PATCH') != 0) {
-            return response()->json(['msg'=>'Method Not Allowed'], 405);
-        }
-        $contentType = $request->header('content-type');        
-        if (!str_starts_with($contentType, 'application/json')) {
-            return response()->json(['msg'=>'Bad Content-Type'], 400);
-        }
-        $blocked = $request->json('blocked');
-        $author->blocked = boolval($blocked); 
-        $author->save();
+        $validated = $request->validated();
+        $author->update($validated);
         return $this->response($author);
     }
 }

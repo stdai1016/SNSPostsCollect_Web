@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\API\ResponseHelper;
 
-class TagTypeRequest extends FormRequest
+class AuthorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,16 +27,20 @@ class TagTypeRequest extends FormRequest
      */
     public function rules()
     {
-        $table = 'tag_types';
-        if ($this->route()->hasParameter('tag_type')) {
-            $param = $this->route()->parameters()['tag_type'];
+        $table = 'authors';
+        if ($this->route()->hasParameter('author')) {
+            $param = $this->route()->parameters()['author'];
             $table =  $param instanceof Model ? $param->getTable() : $table;
             $unique = Rule::unique($table)->ignore($param);
         } else {
             $unique = Rule::unique($table);
         }
         $rules = [
-            'name' => ['required', 'string', 'max:32', $unique]
+            // 'userid' => ['required', 'string', 'max:32', $unique],
+            // 'name' => 'string|max:32',
+            'url' => 'nullable|url|max:255',
+            'profile_img' => 'nullable|url|max:255',
+            'blocked' => 'nullable|boolean'
         ];
         return $rules;
     }
