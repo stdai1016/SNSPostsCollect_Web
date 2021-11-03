@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\API\ResponseHelper;
 
-class TagTypeRequest extends FormRequest
+class PostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,12 +26,16 @@ class TagTypeRequest extends FormRequest
      */
     public function rules()
     {
-        $unique = Rule::unique('App\TagType');
-        if ($this->route()->hasParameter('tag_type')) {
-            $unique = $unique->ignore($this->route()->parameters()['tag_type']);
-        }
         $rules = [
-            'name' => ['required', 'string', 'max:32', $unique]
+            'author_id' => 'required|integer|exist:App\Author,id',
+            'replied_to' => 'nullable|integer|exist:App\Post,id',
+            'text' => 'nullable|string|max:250',
+            'referred_to' => 'nullable|url|max:255',
+            'created_at' => 'nullable|date',
+            'updated_at' => 'nullable|date',
+            'tags' => 'nullable|array',
+            'tags.*' => 'integer|exists:App\Tag,id',
+            'blocked' => 'nullable|boolean'
         ];
         return $rules;
     }

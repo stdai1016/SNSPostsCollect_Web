@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\API\ResponseHelper;
 
-class TagTypeRequest extends FormRequest
+class KeywordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,12 +26,15 @@ class TagTypeRequest extends FormRequest
      */
     public function rules()
     {
-        $unique = Rule::unique('App\TagType');
-        if ($this->route()->hasParameter('tag_type')) {
-            $unique = $unique->ignore($this->route()->parameters()['tag_type']);
+        $unique = Rule::unique('App\Keyword');
+        if ($this->route()->hasParameter('keyword')) {
+            $unique = $unique->ignore($this->route()->parameters()['keyword']);
         }
         $rules = [
-            'name' => ['required', 'string', 'max:32', $unique]
+            'word' => ['required', 'string', 'max:32', $unique],
+            'description' => 'nullable|string|max:250',
+            'tags' => 'nullable|array',
+            'tags.*' => 'integer|exists:App\Tag,id'
         ];
         return $rules;
     }

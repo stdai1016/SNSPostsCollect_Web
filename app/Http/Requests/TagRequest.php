@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\API\ResponseHelper;
 
-class TagTypeRequest extends FormRequest
+class TagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,18 +20,20 @@ class TagTypeRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Determine if the user is authorized to make this request.
      *
-     * @return array
+     * @return bool
      */
     public function rules()
     {
-        $unique = Rule::unique('App\TagType');
-        if ($this->route()->hasParameter('tag_type')) {
-            $unique = $unique->ignore($this->route()->parameters()['tag_type']);
+        $unique = Rule::unique('App\Tag');
+        if ($this->route()->hasParameter('tag')) {
+            $unique = $unique->ignore($this->route()->parameters()['tag']);
         }
         $rules = [
-            'name' => ['required', 'string', 'max:32', $unique]
+            'name' => ['required', 'string', 'max:32', $unique],
+            'description' => 'nullable|string|max:250',
+            'type' => 'nullable|integer|exist:App\TagType,id',
         ];
         return $rules;
     }

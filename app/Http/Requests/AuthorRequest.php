@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\API\ResponseHelper;
 
@@ -27,13 +26,9 @@ class AuthorRequest extends FormRequest
      */
     public function rules()
     {
-        $table = 'authors';
+        $unique = Rule::unique('App\Author');
         if ($this->route()->hasParameter('author')) {
-            $param = $this->route()->parameters()['author'];
-            $table =  $param instanceof Model ? $param->getTable() : $table;
-            $unique = Rule::unique($table)->ignore($param);
-        } else {
-            $unique = Rule::unique($table);
+            $unique = $unique->ignore($this->route()->parameters()['author']);
         }
         $rules = [
             // 'userid' => ['required', 'string', 'max:32', $unique],
